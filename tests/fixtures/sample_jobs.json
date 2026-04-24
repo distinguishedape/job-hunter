@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": "fixture_01",
+    "source": "yc",
+    "company": "GetCrux",
+    "title": "Founding AI Engineer",
+    "location": "Bengaluru, India",
+    "url": "https://www.ycombinator.com/companies/getcrux/jobs/founding-ai-engineer",
+    "description": "GetCrux (YC W24) is building AI-powered video intelligence for enterprise sales teams. We use Claude API and GPT-4 to analyse customer calls and generate structured insights. Looking for a founding engineer to own the AI pipeline end-to-end.\n\nStack: Python, FastAPI, LangChain, Claude API, OpenAI, PostgreSQL, React.\nNo hard experience requirement — we care about what you've built. Prior AI project experience is a plus.\nLocation: Bengaluru in-office (Koramangala).",
+    "posted_date": "2026-04-20",
+    "expected_score": 9,
+    "label": "strong_match"
+  },
+  {
+    "id": "fixture_02",
+    "source": "wellfound",
+    "company": "Sarvam AI",
+    "title": "ML Engineer – Indic LLMs",
+    "location": "Bengaluru, India",
+    "url": "https://wellfound.com/company/sarvam-ai/jobs/ml-engineer",
+    "description": "Sarvam AI is building India's first production-grade Indic LLMs. We're a Series A company backed by Lightspeed and Khosla Ventures.\n\nResponsibilities: fine-tune and evaluate language models, build data pipelines for multilingual corpora, collaborate with research team on model alignment.\nStack: Python, PyTorch, Hugging Face Transformers, CUDA, wandb.\n1-2 years of experience preferred but not required for strong candidates.\nLocation: Bengaluru (HSR Layout).",
+    "posted_date": "2026-04-18",
+    "expected_score": 7,
+    "label": "good_match"
+  },
+  {
+    "id": "fixture_03",
+    "source": "hn",
+    "company": "Razorpay",
+    "title": "Data Analyst",
+    "location": "Bengaluru, India",
+    "url": "https://razorpay.com/jobs/data-analyst",
+    "description": "Razorpay is India's leading payments infrastructure company. We're looking for a Data Analyst to join our risk team.\n\nResponsibilities: build dashboards in Tableau and Looker, write SQL queries for business reporting, partner with product teams to track KPIs.\nStack: SQL, Python (pandas), Tableau, Looker.\n0-1 years of experience. B.Tech in any discipline.\nLocation: Bengaluru.",
+    "posted_date": "2026-04-15",
+    "expected_score": 4,
+    "label": "weak_match"
+  },
+  {
+    "id": "fixture_04",
+    "source": "wellfound",
+    "company": "Stripe",
+    "title": "Senior Software Engineer – Payments Core",
+    "location": "San Francisco, CA (Relocation required)",
+    "url": "https://stripe.com/jobs/senior-swe-payments",
+    "description": "Stripe is hiring a Senior Software Engineer to work on Payments Core infrastructure. This is an on-site role in our San Francisco headquarters.\n\nRequirements: 5+ years of backend engineering experience, strong Ruby or Java background, experience with distributed systems at scale.\nCompensation: $200k-$280k base + equity.\nLocation: San Francisco, CA — relocation assistance provided. Remote not available.",
+    "posted_date": "2026-04-10",
+    "expected_score": 2,
+    "label": "poor_match"
+  },
+  {
+    "id": "fixture_05",
+    "source": "wellfound",
+    "company": "Postman",
+    "title": "AI Product Engineer (Intern / Entry-Level)",
+    "location": "Bengaluru, India",
+    "url": "https://postman.com/jobs/ai-product-engineer",
+    "description": "Postman is adding AI features across its API development platform. We're looking for early-career engineers passionate about LLMs and developer tools.\n\nResponsibilities: integrate LLM APIs into product features, build prompt engineering tooling, write backend Python services.\nStack: Python, Node.js, OpenAI API, Anthropic API, React.\n0-1 years of experience. Computer science background preferred.\nLocation: Bengaluru (hybrid).",
+    "posted_date": "2026-04-22",
+    "expected_score": 7,
+    "label": "good_match"
+  }
+]
