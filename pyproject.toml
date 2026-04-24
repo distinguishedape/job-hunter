@@ -1,0 +1,45 @@
+[project]
+name = "job-hunter"
+version = "0.1.0"
+description = "Weekly scheduled agent that scrapes Bengaluru AI startup jobs, scores them against my CV with an LLM, and pings me on Telegram."
+requires-python = ">=3.12,<3.13"
+readme = "README.md"
+dependencies = [
+    "playwright>=1.49.0",
+    "litellm>=1.55.0",
+    "instructor>=1.7.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "httpx>=0.28.0",
+    "sqlite-utils>=3.37",
+    "python-telegram-bot>=21.9",
+    "structlog>=24.4.0",
+    "beautifulsoup4>=4.12.0",
+    "python-dateutil>=2.9.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "ASYNC"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

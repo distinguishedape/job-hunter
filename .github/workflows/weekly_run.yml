@@ -1,0 +1,4 @@
+# Weekly scheduled run. Implemented in Phase 8.
+name: weekly-run
+on:
+  workflow_dispatch:

@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+.env
+
+# Secrets + personal data (never commit)
+cv.md
+.env
+
+# Runtime artifacts
+jobs.db
+jobs.db-journal
+*.log
+
+# Playwright
+/test-results/
+/playwright-report/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# pytest
+.pytest_cache/
+.ruff_cache/
