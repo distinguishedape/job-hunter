@@ -1,4 +1,75 @@
-# Weekly scheduled run. Implemented in Phase 8.
+# Weekly run: scrape → score → notify. Runs every Monday 03:00 IST.
+#
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   GROQ_API_KEY         - Groq API key for LLM scoring
+#   TELEGRAM_BOT_TOKEN   - BotFather token for the notifier bot
+#   TELEGRAM_CHAT_ID     - Your chat ID (numeric)
+#   CV_MD                - Full contents of your cv.md (kept out of git; written
+#                          to disk at runtime by the workflow)
+
 name: weekly-run
+
 on:
-  workflow_dispatch:
+  # 03:00 IST == 21:30 UTC the previous day. Cron is UTC.
+  schedule:
+    - cron: "30 21 * * 0"  # Sunday 21:30 UTC == Monday 03:00 IST
+  workflow_dispatch:        # Lets you trigger a run manually from the Actions tab
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Install Playwright Chromium
+        run: uv run python -m playwright install --with-deps chromium
+
+      # Restore the previous run's jobs.db so dedupe works week-over-week.
+      # GitHub Actions caches are immutable per key, so we use a unique key
+      # per run and fall back to the newest `job-hunter-db-*` on restore.
+      - name: Restore jobs.db cache
+        id: db_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: jobs.db
+          key: job-hunter-db-${{ github.run_id }}
+          restore-keys: |
+            job-hunter-db-
+
+      # CV is private — it's stored as a repo secret, not committed. Write it
+      # to disk here so the scorer can read it like it does in local dev.
+      - name: Materialize cv.md from secret
+        run: |
+          printf '%s' "$CV_MD" > cv.md
+          test -s cv.md || (echo "cv.md is empty — is CV_MD secret set?" && exit 1)
+        env:
+          CV_MD: ${{ secrets.CV_MD }}
+
+      - name: Run job-hunter
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: uv run python -m src.main
+
+      # Save the updated db under a run-unique key so each week's dedupe state
+      # is preserved. `always()` ensures we still save if the run partially fails.
+      - name: Save jobs.db cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: jobs.db
+          key: job-hunter-db-${{ github.run_id }}
