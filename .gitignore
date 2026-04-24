@@ -28,6 +28,9 @@ jobs.db-journal
 .idea/
 .DS_Store
 
+# Claude Code local settings
+.claude/settings.local.json
+
 # pytest
 .pytest_cache/
 .ruff_cache/
